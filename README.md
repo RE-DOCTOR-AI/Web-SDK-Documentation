@@ -204,9 +204,7 @@ This repository contains demo Application with also plays a role of an example o
 
   It also works on mobile devices such as smartphones and Tablets.
 
-
   In order to get the SDK file, please contact info@re.doctor
-  Instructions on where to get the SDK (npm, CDN, etc.).
 
 ### SDK simple work process
 ```mermaid
@@ -319,7 +317,6 @@ This repository contains demo Application with also plays a role of an example o
 
 ### License Key Setup
   Along with SDK files you will also get your License key. If you don't have it yet or need or have any questions, please send a request to info@re.doctor.
-  You can see here how you can pass the license key to the SDK:
 
 ### Optional vs required fields.
 On the page you have to have some elements which are required by the SDK.
@@ -348,3 +345,10 @@ Here are few examples of such elements:
 
 ### Customization
   You can customzie the look and feel of the page. Just keep the required elements on the page.
+
+### Screenshots
+
+<img width="215" alt="image" src="https://github.com/user-attachments/assets/23f79df0-df66-4752-b5cc-f105216554fe">
+
+### Contacts
+For any questions please contact info@re.doctor
