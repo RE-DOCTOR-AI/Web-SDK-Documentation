@@ -82,7 +82,7 @@ Documentation for WEB SDK of the RE.DOCTOR Vitals software.
   
   5. **Access your application**
   
-     Open your browser and navigate to `https://localhost/` to view your application. All API calls will be proxied to `https://api.dev.redoctor.org/api/...`.
+     Open your browser and navigate to `https://localhost/` to view your application.
   
   6. **Notes**
   
