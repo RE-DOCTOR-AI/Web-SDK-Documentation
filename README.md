@@ -230,7 +230,11 @@ This repository contains demo Application with also plays a role of an example o
     - Gender (1 - Male, 2 - Female)<BR/>
 
   Those parameters will be required to initialize the SDK.
-  
+  However if you need to update user parameters after initialization, you can use the follofing function:
+  ```Javascript
+    tvs.setUserData(height.value, weight.value, age.value, gender.value)
+  ```
+    
   Here are the important steps with some code examples.
   1. Import SDK file into your page
       ```Javascript
