@@ -221,7 +221,7 @@ This repository contains demo Application with also plays a role of an example o
   ```
 
 ### Preparing and Initializing Up the SDK
-  Please see the file to get the example of integration.
+  Please see the file to get the example of integration. https://github.com/RE-DOCTOR-AI/Web-SDK-Documentation/blob/main/index.html
 
   Bear in mind that SDK requires user parameters:<BR/>
     - Height (cm)<BR/>
@@ -349,6 +349,10 @@ Here are few examples of such elements:
 ### Screenshots
 
 <img width="215" alt="image" src="https://github.com/user-attachments/assets/23f79df0-df66-4752-b5cc-f105216554fe">
+<img width="215" alt="image" src="https://github.com/user-attachments/assets/94b344e3-339c-4539-aa2f-1334c143143c">
+<img width="215" alt="image" src="https://github.com/user-attachments/assets/84c40348-a885-4190-a35a-eee9bac759f3">
+
+
 
 ### Contacts
 For any questions please contact info@re.doctor
