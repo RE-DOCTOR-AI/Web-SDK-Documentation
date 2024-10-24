@@ -56,7 +56,7 @@ Documentation for WEB SDK of the RE.DOCTOR Vitals software.
           };
           
           // Serve your productionExecutable folder
-          app.use(express.static(path.join(__dirname, 'ReDoctorWebSDK')));
+          app.use(express.static(path.join(__dirname, 'Web-SDK-Documentation')));
           
           // Proxy settings
           app.use('/api', createProxyMiddleware({
@@ -88,7 +88,7 @@ Documentation for WEB SDK of the RE.DOCTOR Vitals software.
   
       To run the project, ensure you have the following files:
       
-      - `ReDoctorWebSDK` folder (contains your compiled HTML and JS files)
+      - `Web-SDK-Documentation` folder (contains your compiled HTML and JS files)
       - `server.js` file
       - `key.pem` and `cert.pem` files
       - Replace `<your-repo-url>` and `<your-project-directory>` with actual values relevant to your project.
@@ -114,7 +114,71 @@ Documentation for WEB SDK of the RE.DOCTOR Vitals software.
 
 ### If you already have some web server
 <details>
-    <summary> See details here </summary>
+  <summary> See details here </summary>
+  
+  1. **Nginx Example**
+        
+        1. Copy your `Web-SDK-Documentation` folder to the server, under a directory like `/var/www/html/myapp` or any preferred location.<br/>
+        2. Update the Nginx configuration to serve the files from that directory.<br/><br/>
+           Open the Nginx configuration file, typically located at `/etc/nginx/sites-available/default` or a custom configuration file if they are using one.
+           Add a location block to point to your `Web-SDK-Documentation` folder:
+    
+           ```nginx
+           server {
+               listen 80;
+               server_name your-domain.com;
+               location /myapp/ {
+                   root /var/www/html;
+                   index index.html;
+                   try_files $uri $uri/ /myapp/index.html;
+               }
+               # Optional: Add reverse proxy for API calls
+               location /api/ {
+                   proxy_pass https://api.dev.redoctor.org/;
+                   proxy_set_header Host $host;
+                   proxy_set_header X-Real-IP $remote_addr;
+                   proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                   proxy_set_header X-Forwarded-Proto $scheme;
+               }
+           }
+           ```
+        3. Reload Nginx to apply the changes:
+           ```bash
+           sudo systemctl reload nginx
+           ```
+           After this, users will be able to access your app by visiting `http://your-domain.com/myapp/`.
+        
+  2. **Apache Example**
+        1. Copy the `Web-SDK-Documentation` folder to a location like `/var/www/html/myapp`.
+        
+        2. Edit the Apache configuration file (commonly located in `/etc/apache2/sites-available/000-default.conf` or similar).
+           Add a new `Alias` directive and set up the proxy for API calls:
+           ```apache
+           <VirtualHost *:80>
+               ServerName your-domain.com
+        
+               Alias /myapp /var/www/html/myapp
+               <Directory /var/www/html/myapp>
+                   Options Indexes FollowSymLinks
+                   AllowOverride None
+                   Require all granted
+               </Directory>
+        
+               # Optional: Reverse proxy for API calls
+               ProxyPass /api https://api.dev.redoctor.org/
+               ProxyPassReverse /api https://api.dev.redoctor.org/
+           </VirtualHost>
+           ```
+        3. Enable required modules (if not already enabled)
+           ```bash
+           sudo a2enmod proxy proxy_http
+           ```
+        4. Restart Apache to apply the changes
+           ```bash
+           sudo systemctl restart apache2
+           ```
+           Now users can access the app at `http://your-domain.com/myapp/` with API calls proxied to your backend.
+  </summary>
 </details>
 
 ## How to integrate Re.Doctor Web SDK into your web solution
