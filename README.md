@@ -1,5 +1,6 @@
 # Web-SDK-Documentation
-Documentation for WEB SDK of the RE.DOCTOR Vitals software.
+Documentation for WEB SDK of the RE.DOCTOR Vitals software.<br/>
+This repository contains demo Application with also plays a role of an example of integration of SDK into a Web page using just Javascript and HTML.
 
 ## How to set up and run Demo WebSDK
   ###  If you don't have a web server yet
@@ -182,4 +183,168 @@ Documentation for WEB SDK of the RE.DOCTOR Vitals software.
 </details>
 
 ## How to integrate Re.Doctor Web SDK into your web solution
+### Introduction
+  RE.DOCTOR Web SDK is the software which allow to collect PPG signal and estimate some Helath parameter based on that.<BR/>
+    On current version the following parameters are available:<BR/>
+    1. Blood Oxygen<BR/>
+    2. Heart Rate<BR/>
+    3. Respiration Rate<BR/>
+    4. Blood Pressure<BR/>
+    5. Pulse Pressure<BR/>
+    6. HRV<BR/>
+    7. Stress<BR/>
+    8. LASI<BR/>
+    9. Reflection Index<BR/>
+      Detailed explanation on those parameters can be found here: https://drive.google.com/file/d/1t3itxaFMvYszrI0Y-bqRbzoUnNX3AxhX/view?usp=drive_link
+  
+### Requirements
+  This version of Web SDK was tested on the followinf platforms and browsers:
+  
+  Google Chrome, Safari.
 
+  It also works on mobile devices such as smartphones and Tablets.
+
+
+  In order to get the SDK file, please contact info@re.doctor
+  Instructions on where to get the SDK (npm, CDN, etc.).
+
+### SDK simple work process
+```mermaid
+        flowchart TD
+        A(Start) -->B[Pass license key]
+        B --> C[Prepare & Initialize SDK]
+        C --> D[Capture and process video input]
+        D --> F[Check statuses]
+        F --> |anys status except CALCULATION_FINISHED|G[Do actions for statuses]
+        G --> H{Status = CALCULATION_FINISHED}
+        H --> |No|F
+        H --> |Yes|J[Get results]
+        J --> I(Finish)
+  ```
+
+### Preparing and Initializing Up the SDK
+  Please see the file to get the example of integration.
+
+  Bear in mind that SDK requires user parameters:<BR/>
+    - Height (cm)<BR/>
+    - Weight (kg)<BR/>
+    - Age (years)<BR/>
+    - Gender (1 - Male, 2 - Female)<BR/>
+
+  Those parameters will be required to initialize the SDK.
+  
+  Here are the important steps with some code examples.
+  1. Import SDK file into your page
+      ```Javascript
+        <script src="tvs.js?v=1.6.0.11"></script>
+      ```
+     
+  2. Check if the SDK loaded correctly
+      ```Javascript
+          if (typeof tvs !== 'undefined' && typeof tvs.initializeVitalSignsProcessor === 'function') {
+      
+          } else {
+              console.error("initializeVitalSignsProcessor initialization error.");
+          }
+      ```
+  3. Pass your License and initialize the SDK. Here you need to pass user data. (On the demo page those parameters are taken from Input fileds)
+      ```Javascript
+        if (typeof tvs !== 'undefined' && typeof tvs.initializeVitalSignsProcessor === 'function') {
+          tvs.setLicenseKey("<your license key>")
+    
+          //initialize VitalSignsProcessor with user data. User data is required as it's used for Vitals calculations.
+          var initResults = tvs.initializeVitalSignsProcessor(height.value, weight.value, age.value, gender.value)
+          console. log (initResults)
+    
+        } else {
+            console.error("initializeVitalSignsProcessor initialization error.");
+        }
+      ```
+  4. Check the statuses<br/>
+      ```Javascript
+        /*
+            We have several statuses before, during and after measurement.
+            We work with those events here.
+        */
+        window.addEventListener("statusUpdate", function(event) {
+            const { status, message } = event.detail; // Extract status and message
+            window.currentStatus = status;
+            ...
+        }
+      ```
+      Here is the list of different statuses and their meaning. In brackets you see text which provided by SDK additionaly if that status accurs:</br>
+        - `READY_TO_START("Ready to start")`</br></br>
+        - `RED_INTENSITY_NOT_ENOUGH("Not good red intensity to process. Should start again")` Video has low red intensity which is crucial for the SDK</br></br>
+        - `VALIDATION_ERROR("Validation error")` Some parameters of the video input didn't pass requirements. Usually mean video is too light or too dark.</br></br>
+        - `IN_PROGRESS("Processing in progress")`</br></br>
+        - `MEASUREMENT_FAILED("Measurement Failed. Should Start again")`</br></br>
+        - `START_CALCULATING("Proceed to calculate the results")` Occurs when all data collected and SDK started to calculate parameters</br></br>
+        - `CALCULATION_FINISHED("Calculation finished")`</br></br>
+        
+  5. Get results
+     
+      You can get results once you have status "CALCULATION_FINISHED".
+      Here is code example how this can be done:
+      ```Javascript
+            //this status says us that calculations are done and we can get results from SDK
+            if (window.currentStatus === "CALCULATION_FINISHED") {
+                debugStatus.innerHTML = "";
+                console.log("Processing finished with message:", message);
+                const vitalsResults = document.getElementById("vitalsResults");
+                const statusDiv = document.getElementById("status");
+                statusDiv.style.display = "none";
+                //const loader = document.getElementById("loader");
+                //loader.style.display = "none";
+    
+    
+                //Here we get values from SDK and show them to user.
+                vitalsResults.innerHTML =
+                    "SpO2: " + tvs.Vitals.bloodOxygen + " %<br>" +
+                    "Pulse: " + tvs.Vitals.heartRate + " bpm<br>" +
+                    "Respiration: " + tvs.Vitals.respirationRate + " bpm<br>" +
+                    "Blood Pressure: " + tvs.Vitals.bloodPressureSystolic +"/" + tvs.Vitals.bloodPressureDiastolic + " mmHg<br>" +
+                    "Pulse Pressure: " + tvs.Vitals.pulsePressure + " mmHg<br>" +
+                    "HRV: " + tvs.Vitals.hrv + "<br>" +
+                    "Stress: " + tvs.Vitals.stress + "<br>" +
+                    "LASI: " + tvs.Vitals.lasi + "<br>" +
+                    "Reflection index: " + tvs.Vitals.reflectionIndex + "<br>";
+            //You can do some actions or show to user some additional info for those statuses
+            } else if (window.currentStatus === "IN_PROGRESS" || window.currentStatus === "READY_TO_START") {
+                debugStatus.innerHTML = message; // Show ongoing status message
+            }
+              else {
+                debugStatus.innerHTML = message; // Show any other status message
+            }
+      ``` 
+
+### License Key Setup
+  Along with SDK files you will also get your License key. If you don't have it yet or need or have any questions, please send a request to info@re.doctor.
+  You can see here how you can pass the license key to the SDK:
+
+### Optional vs required fields.
+On the page you have to have some elements which are required by the SDK.
+You can easily find them on the demo html page.
+Here are few examples of such elements:
+```HTML
+    
+    <!--
+        Video element is required bys SDK as it's used to pass the data to SDK.
+        So please keep that div and it's id "videoElemen" on the page
+    -->
+    <video id="videoElement" width="354" height="288" hidden autoplay playsinline></video>
+    <canvas id="canvas" style="overflow:auto" width="177" height="144" hidden></canvas>
+    
+
+    <!--
+    Loader is required by SDK, meaning you need to keep that div with id "loader" on the page
+    SDK uses that element to show loading gif while calculations are being made
+    You can put your text here and use another loader.
+    -->
+    <div id="loader" class="small-loader" style="display: none;">
+        <img src="Loader.gif" alt="Loading...">
+        Calculating results
+    </div>
+```
+
+### Customization
+  You can customzie the look and feel of the page. Just keep the required elements on the page.
