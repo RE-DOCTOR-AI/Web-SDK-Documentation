@@ -218,7 +218,7 @@ This repository contains demo Application wich also plays a role of an example o
         J --> I(Finish)
   ```
 
-### Preparing and Initializing Up the SDK
+### Preparing and Initializing the SDK
   Please see the file to get the example of integration. https://github.com/RE-DOCTOR-AI/Web-SDK-Documentation/blob/main/index.html
 
   Bear in mind that SDK requires user parameters:<BR/>
@@ -228,7 +228,7 @@ This repository contains demo Application wich also plays a role of an example o
     - Gender (1 - Male, 2 - Female)<BR/>
 
   Those parameters will be required to initialize the SDK.
-  However if you need to update user parameters after initialization, you can use the follofing function:
+  However, if you need to update user parameters after initialization, you can use the follofing function:
   ```Javascript
     tvs.setUserData(height.value, weight.value, age.value, gender.value)
   ```
@@ -292,10 +292,7 @@ This repository contains demo Application wich also plays a role of an example o
                 console.log("Processing finished with message:", message);
                 const vitalsResults = document.getElementById("vitalsResults");
                 const statusDiv = document.getElementById("status");
-                statusDiv.style.display = "none";
-                //const loader = document.getElementById("loader");
-                //loader.style.display = "none";
-    
+                statusDiv.style.display = "none";    
     
                 //Here we get values from SDK and show them to user.
                 vitalsResults.innerHTML =
@@ -318,7 +315,7 @@ This repository contains demo Application wich also plays a role of an example o
       ``` 
 
 ### License Key Setup
-  Along with SDK files you will also get your License key. If you don't have it yet or need or have any questions, please send a request to info@re.doctor.
+  Along with SDK files you will also get your License key. If you don't have it yet or have any questions, please send a request to info@re.doctor.
 
 ### Optional vs required fields.
 On the page you have to have some elements which are required by the SDK.
@@ -335,9 +332,9 @@ Here are few examples of such elements:
     
 
     <!--
-    Loader is required by SDK, meaning you need to keep that div with id "loader" on the page
-    SDK uses that element to show loading gif while calculations are being made
-    You can put your text here and use another loader.
+        Loader is required by SDK, meaning you need to keep that div with id "loader" on the page
+        SDK uses that element to show loading gif while calculations are being made
+        You can put your text here and use another loader.
     -->
     <div id="loader" class="small-loader" style="display: none;">
         <img src="Loader.gif" alt="Loading...">
