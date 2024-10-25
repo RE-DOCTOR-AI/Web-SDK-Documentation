@@ -1,8 +1,8 @@
 # Web-SDK-Documentation
 Documentation for WEB SDK of the RE.DOCTOR Vitals software.<br/>
-This repository contains demo Application with also plays a role of an example of integration of SDK into a Web page using just Javascript and HTML.
+This repository contains demo Application wich also plays a role of an example of integration of SDK into a Web page using just Javascript and HTML.
 
-## How to set up and run Demo WebSDK
+## How to set up and run the demo Application
   ###  If you don't have a web server yet
 <details>
   <summary> See details here </summary>
@@ -184,8 +184,8 @@ This repository contains demo Application with also plays a role of an example o
 
 ## How to integrate Re.Doctor Web SDK into your web solution
 ### Introduction
-  RE.DOCTOR Web SDK is the software which allow to collect PPG signal and estimate some Helath parameter based on that.<BR/>
-    On current version the following parameters are available:<BR/>
+  RE.DOCTOR Web SDK is the software which allow to estimate some Helath parameter based on PPG signal.<BR/>
+    On the current version the following parameters are available:<BR/>
     1. Blood Oxygen<BR/>
     2. Heart Rate<BR/>
     3. Respiration Rate<BR/>
@@ -194,15 +194,13 @@ This repository contains demo Application with also plays a role of an example o
     6. HRV<BR/>
     7. Stress<BR/>
     8. LASI<BR/>
-    9. Reflection Index<BR/>
+    9. Reflection Index<BR/><BR/>
       Detailed explanation on those parameters can be found here: https://drive.google.com/file/d/1t3itxaFMvYszrI0Y-bqRbzoUnNX3AxhX/view?usp=drive_link
   
 ### Requirements
-  This version of Web SDK was tested on the followinf platforms and browsers:
-  
-  Google Chrome, Safari.
-
-  It also works on mobile devices such as smartphones and Tablets.
+  This version of Web SDK was tested on Android and iOS based smartphones and Tablets.
+  Supported browsers: Google Chrome, Safari, Brave, Vivaldi, Opera.
+  Bear in mind that despite the fact it was tested on different platforms and broswers there is still possibility there may be some specifics on different devices and Browser. If you faced any difficultioes running it, please connect us.
 
   In order to get the SDK file, please contact info@re.doctor
 
