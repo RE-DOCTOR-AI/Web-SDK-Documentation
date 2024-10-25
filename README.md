@@ -198,9 +198,9 @@ This repository contains demo Application wich also plays a role of an example o
       Detailed explanation on those parameters can be found here: https://drive.google.com/file/d/1t3itxaFMvYszrI0Y-bqRbzoUnNX3AxhX/view?usp=drive_link
   
 ### Requirements
-  This version of Web SDK was tested on Android and iOS based smartphones and Tablets.
-  Supported browsers: Google Chrome, Safari, Brave, Vivaldi, Opera.
-  Bear in mind that despite the fact it was tested on different platforms and broswers there is still possibility there may be some specifics on different devices and Browser. If you faced any difficultioes running it, please connect us.
+  This version of Web SDK was tested on Android and iOS based smartphones and Tablets.<BR/>
+  Supported browsers: Google Chrome, Safari, Brave, Vivaldi, Opera.<BR/>
+  Bear in mind that despite the fact it was tested on different platforms and broswers there is still a possibility that there may be some specifics on different devices and Browser. If you faced any difficultioes running it, please connect us.<BR/>
 
   In order to get the SDK file, please contact info@re.doctor
 
