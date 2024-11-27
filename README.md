@@ -211,7 +211,7 @@ This repository contains demo Application wich also plays a role of an example o
         B --> C[Prepare & Initialize SDK]
         C --> D[Capture and process video input]
         D --> F[Check statuses]
-        F --> |anys status except CALCULATION_FINISHED|G[Do actions for statuses]
+        F --> |any status except CALCULATION_FINISHED|G[Do actions for statuses]
         G --> H{Status = CALCULATION_FINISHED}
         H --> |No|F
         H --> |Yes|J[Get results]
