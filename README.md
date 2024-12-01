@@ -31,7 +31,7 @@ This repository contains demo Application wich also plays a role of an example o
          cd <your-project-directory>
          ```
          <br/>
-      2. Copy the folder into your web server folder created on the step "Prerequisites" (in this example into the mywebserver folder)<br/><br/>
+      2. Make sure to copy the  repository folder (e.g. Web-SDK-Documentation) into your web server folder created on the step "Prerequisites" (in this example into the mywebserver folder)<br/><br/>
       3. Open terminal and go to your webserver folder<br/><br/>
       4. Install the necessary dependencies:<br/>
          ```bash
@@ -39,7 +39,7 @@ This repository contains demo Application wich also plays a role of an example o
          ```
   
   3. **Running the Server**
-      1. Create the new file (e.g. server.js):<br/><br/>
+      1. Create the new file (e.g. server.js) and put it into your webserver folder (in this example into the mywebserver folder):<br/><br/>
          Make sure to update the paths for `key.pem` and `cert.pem` in the `server.js` file to match the location where you generated these files.
          ```javascript
           const express = require('express');
