@@ -125,23 +125,36 @@ This repository contains demo Application wich also plays a role of an example o
            Add a location block to point to your `Web-SDK-Documentation` folder:
     
            ```nginx
-           server {
-               listen 80;
-               server_name your-domain.com;
-               location /myapp/ {
-                   root /var/www/html;
-                   index index.html;
-                   try_files $uri $uri/ /myapp/index.html;
-               }
-               # Optional: Add reverse proxy for API calls
-               location /api/ {
-                   proxy_pass https://api.dev.redoctor.org/;
-                   proxy_set_header Host $host;
-                   proxy_set_header X-Real-IP $remote_addr;
-                   proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                   proxy_set_header X-Forwarded-Proto $scheme;
-               }
-           }
+              server {
+                listen       443 ssl;
+                server_name  <your server name>;              
+                ssl_certificate     <path to cert>;
+                ssl_certificate_key  <path to key>;
+
+                ssl_session_cache    shared:SSL:1m;
+                ssl_session_timeout  5m;              
+        
+                ssl_ciphers  HIGH:!aNULL:!MD5;    
+                ssl_prefer_server_ciphers  on;
+          
+                 location / {
+                      root <path to the folder with the app>; 
+                      index  index.html index.htm;
+                      autoindex on;
+                  }
+          
+                  location ~ ^/api(/|$) {
+                      rewrite ^/api(/|)(.*)$ /$2 break;
+                      proxy_pass https://api.dev.redoctor.org;
+                      proxy_set_header Host api.dev.redoctor.org;
+                      proxy_set_header X-Real-IP $remote_addr;
+                      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                      proxy_set_header X-Forwarded-Proto $scheme;
+                      proxy_redirect off;
+          
+                      proxy_ssl_verify off;
+                 }
+              }
            ```
         3. Reload Nginx to apply the changes:
            ```bash
